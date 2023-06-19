@@ -5,7 +5,7 @@ dotenv.load_dotenv()
 
 
 
-main_bot = aiogram.Bot("6091061652:AAHOsg35q__Nvu92JAmIHwtplSmnL5jEPKw")
+main_bot = aiogram.Bot("token")
 disp = aiogram.Dispatcher(main_bot)
 
 
