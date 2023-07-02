@@ -1,24 +1,23 @@
-import aiogram
-import dotenv
-
-dotenv.load_dotenv()
-
-
-
-main_bot = aiogram.Bot("token")
-disp = aiogram.Dispatcher(main_bot)
+from aiogram import Bot, Dispatcher
+from config_data.config import load_config, Config
+import asyncio
+from handlers import nums_handlers, base_commands_handlers
 
 
-@disp.message_handler()
-async def do_stuff(message: aiogram.types.Message):
-    chat_id = message.chat.id
-    text = "Check out this cool hamster!"
-    link = "https://i.pinimg.com/564x/86/19/5b/86195b199cb576d170594ec66ebb2c64.jpg"
+async def main() -> None:
+    config: Config = load_config(".env")
 
-    await main_bot.send_message(chat_id=chat_id, text=text)
-    await main_bot.send_photo(chat_id=chat_id, photo=link)
     
+    elt_bot: Bot = Bot(token=config.tg_bot.token)
+    dp: Dispatcher = Dispatcher()
 
+
+    dp.include_router(nums_handlers.router)
+    dp.include_router(base_commands_handlers.router_comm)
+
+
+    await elt_bot.delete_webhook(drop_pending_updates=True)
+    await dp.start_polling(elt_bot)
 
 if __name__ == "__main__":
-    aiogram.utils.executor.start_polling(disp)
+    asyncio.run(main())

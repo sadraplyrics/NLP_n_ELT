@@ -1,0 +1,27 @@
+c.execute("""
+CREATE TABLE users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL DEFAULT ''
+)""")
+
+
+c.execute("""
+CREATE TABLE words (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    word VARCHAR(20) NOT NULL DEFAULT '',
+    meaning VARCHAR(500) NOT NULL DEFAULT '',
+    example_1 VARCHAR(500) NOT NULL DEFAULT '',
+    example_2 VARCHAR(500) NOT NULL DEFAULT '',
+    example_3 VARCHAR(500) NOT NULL DEFAULT ''
+)""")
+          
+
+c.execute("""
+CREATE TABLE users_words (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    word_id INT UNSIGNED NOT NULL,
+    level ENUM("new", "bad", "mid", "good") NOT NULL DEFAULT "new",
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY(word_id) REFERENCES words(id)
+)""")

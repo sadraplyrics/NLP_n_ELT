@@ -2,4 +2,4 @@
 
 This repository contains source code to the bot I created as my final assignment in uni using NLP technologies and telegram API
 
-There WILL be instructiuons trust me 
+There WILL be instructiuons trust me
