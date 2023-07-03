@@ -3,4 +3,8 @@
 states: dict = {
     "nums_active": False,
     "prompted": False,
+    "prompted_name": False,
+    "prompted_words": False,
+    "words_active": False,
+    "words_active_prompt": False,
 }
